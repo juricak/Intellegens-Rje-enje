@@ -9,9 +9,9 @@ class Family:
         numberofchildren = len(self.children)
         chi = []
         for child in self.children:
-            chi.append(child.firstname)
+            chi.append(child)
         if numberofchildren > 1:
             chi.insert(-1,'and')
         chistr = ' '.join(chi)
-        result = 'In the ' + self.familyname + ' family Mother ' + self.mother.firstname + ' and Father ' + self.father.firstname + ' have ' + str(numberofchildren) + ' children:\n' +  chistr
+        result = 'In the ' + self.familyname + ' family Mother ' + self.mother + ' and Father ' + self.father + ' have ' + str(numberofchildren) + ' children:\n' +  chistr
         return result
