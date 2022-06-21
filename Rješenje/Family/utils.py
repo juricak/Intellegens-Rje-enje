@@ -1,5 +1,6 @@
-from Family.Person import Person
 from Family.Family import Family
+from Family.Person import Person
+
 
 def parseFamilies(string):
 
@@ -12,8 +13,11 @@ def parseFamilies(string):
         params = person.split(' ')
         if len(params)==2:
             persons.append(Person(params[-1], params[-2], None))
-        else:
+        elif len(params)==3:
             persons.append(Person(params[-1], params[-2], params[-3]))
+        else:
+            message = print('Malformed input, check input values!')
+            return message
 
     uniqueLastName = []
 
@@ -25,14 +29,18 @@ def parseFamilies(string):
 
     for familyName in uniqueLastName:
         children = []
+        mother = 'MISSING!'
+        father = 'MISSING!'
         for person in persons:
             if person.lastname == familyName:
-                if person.title == None:
-                    children.append(person)
+                if person.title == 'Mrs.':
+                    mother = person.firstname
                 elif person.title == 'Mr.':
-                    father = person
+                    father = person.firstname
                 else:
-                    mother = person
-        families.append(Family(familyName, father, mother, children)) 
-
+                    children.append(person.firstname)
+        try:
+            families.append(Family(familyName, father, mother, children))
+        except Exception as e:
+            print(e)
     return families
